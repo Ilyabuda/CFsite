@@ -3,37 +3,98 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My Website</title>
-
-    <!-- CSS -->
+    <title>Lumina Flashcards</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
     <link rel="stylesheet" href="css/style.css">
 </head>
-<body>
+<body class="min-h-screen flex flex-col font-sans">
 
-    <header>
-        <nav class="navbar">
-            <h1 class="logo">MyWebsite</h1>
-            <ul class="nav-links">
-                <li><a href="#">Home</a></li>
-                <li><a href="#">About</a></li>
-                <li><a href="#">Contact</a></li>
-            </ul>
-        </nav>
+    <header class="p-6 border-b sticky top-0 z-40 backdrop-blur-md themed-border" style="background-color: color-mix(in srgb, var(--bg-color) 80%, transparent);">
+        <div class="max-w-6xl mx-auto flex items-center justify-between">
+            <div class="flex items-center gap-3">
+                <div class="w-10 h-10 rounded-xl flex items-center justify-center rotate-3 shadow-lg themed-btn">
+                    <i data-lucide="book-open" class="w-6 h-6"></i>
+                </div>
+                <h1 id="app-title" class="text-2xl font-extrabold tracking-tight">Lumina Flashcards</h1>
+            </div>
+            <div class="flex items-center gap-2 md:gap-4">
+                <button onclick="app.shareDeck()" id="share-btn" class="flex items-center gap-2 px-4 py-2 rounded-xl font-bold transition-all border-2 border-transparent hover:bg-black/10">
+                    <i data-lucide="share-2" id="share-icon" class="w-5 h-5"></i>
+                    <span id="share-text" class="hidden md:inline">Share</span>
+                </button>
+                <button onclick="app.toggleSettings()" class="p-2 rounded-xl border-2 border-transparent hover:bg-black/10 transition-all">
+                    <i data-lucide="settings" class="w-6 h-6"></i>
+                </button>
+            </div>
+        </div>
     </header>
 
-    <main>
-        <section class="hero">
-            <h2>Welcome to My Website</h2>
-            <p>This is a clean GitHub starter template.</p>
-            <button id="clickBtn">Click Me</button>
-        </section>
+    <main id="app-main" class="flex-1 p-6 md:p-10 w-full flex items-center justify-center">
+        <!-- Content injected via JS -->
     </main>
 
-    <footer>
-        <p>© 2026 MyWebsite. All rights reserved.</p>
-    </footer>
+    <!-- Settings Modal -->
+    <div id="settings-modal" class="fixed inset-0 bg-black/50 backdrop-blur-sm hidden items-center justify-center z-50 p-4">
+        <div class="w-full max-w-md rounded-3xl p-8 shadow-2xl border themed-card relative animate-fade-in">
+            <button onclick="app.toggleSettings()" class="absolute top-6 right-6 p-2 rounded-full hover:bg-black/10 transition-colors">
+                <i data-lucide="x" class="w-6 h-6"></i>
+            </button>
+            <h2 id="settings-title" class="text-2xl font-bold mb-8 flex items-center gap-3">
+                <i data-lucide="settings" class="w-6 h-6"></i> Settings
+            </h2>
 
-    <!-- JavaScript -->
+            <div class="space-y-6">
+                <!-- Theme -->
+                <div class="space-y-3">
+                    <label id="label-theme" class="text-sm font-bold uppercase tracking-wider flex items-center gap-2 opacity-70">
+                        <i data-lucide="palette" class="w-4 h-4"></i> Theme
+                    </label>
+                    <div class="grid grid-cols-2 gap-2" id="theme-options"></div>
+                </div>
+
+                <!-- Study Mode -->
+                <div class="space-y-3">
+                    <label id="label-study-type" class="text-sm font-bold uppercase tracking-wider flex items-center gap-2 opacity-70">
+                        <i data-lucide="book-open" class="w-4 h-4"></i> Study Type
+                    </label>
+                    <div class="grid grid-cols-1 gap-2" id="study-options"></div>
+                </div>
+
+                <!-- Animation -->
+                <div class="space-y-3" id="animation-container">
+                    <label id="label-anim" class="text-sm font-bold uppercase tracking-wider flex items-center gap-2 opacity-70">
+                        <i data-lucide="wand-2" class="w-4 h-4"></i> Animation
+                    </label>
+                    <div class="flex bg-black/10 rounded-xl p-1" id="anim-options"></div>
+                </div>
+
+                <!-- Language -->
+                <div class="space-y-3">
+                    <label id="label-lang" class="text-sm font-bold uppercase tracking-wider flex items-center gap-2 opacity-70">
+                        <i data-lucide="globe" class="w-4 h-4"></i> Language
+                    </label>
+                    <div class="flex bg-black/10 rounded-xl p-1" id="lang-options"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Formal About Banner -->
+    <footer class="border-t themed-border mt-auto">
+        <div class="max-w-4xl mx-auto p-8 text-center space-y-4">
+            <h4 id="about-title" class="text-lg font-bold uppercase tracking-widest opacity-80">About the Project</h4>
+            <p id="about-text" class="text-sm md:text-base leading-relaxed max-w-2xl mx-auto opacity-70">
+                Developed collaboratively by a dedicated team of high school students. Our mission is to provide a lightweight, aesthetically pleasing, and highly effective learning platform. We built Lumina Flashcards to help students worldwide master their subjects, retain knowledge effortlessly, and easily share their custom study sets with peers.
+            </p>
+            <div class="pt-4 flex items-center justify-center gap-2 opacity-50 text-xs font-semibold">
+                <span>&copy; <span id="year"></span> Lumina Team.</span>
+                <span>All rights reserved.</span>
+            </div>
+        </div>
+    </footer>
     <script src="js/script.js"></script>
 </body>
 </html>
